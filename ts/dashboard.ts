@@ -19,8 +19,6 @@ export class Dashboard
 
 	clock: fabric.Text;
 	date: fabric.Text;
-
-	foo: string;
 	
 	constructor(c: fabric.Canvas)
 	{
