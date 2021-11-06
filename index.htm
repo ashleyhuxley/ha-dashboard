@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Serenity Dashboard</title>
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="Serenity Dashboard">
+  <meta property="og:type" content="website">
+
+  <link href="styles/PirulenRg-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="styles/LibelSuitRg-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/styles.css?v=1.1">
+
+
+</head>
+
+<body>
+  <!-- your content here... -->
+  <canvas id="mainCanvas" width="1280" height="1024"></canvas>
+
+  <script type="text/javascript"> 
+    var cachebuster = Math.round(new Date().getTime() / 1000); 
+    document.write('<scr'+'ipt type="text/javascript" src="bundle.js?cb=' +cachebuster+'"></scr' + 'ipt>');
+    </script>    
+</body>
+</html>

@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Pirulen Rg';
+    src: url('PirulenRg-Regular.woff2');
+}
+
+@font-face {
+    font-family: 'Libel Suit Rg';
+    src: url('LibelSuitRg-Regular.woff2') format('woff2'),
+        url('LibelSuitRg-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+    font-family: 'Pirulen Rg';
+    font-weight: normal;
+	color: white;
+	letter-spacing: .3rem;
+}
