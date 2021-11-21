@@ -29,6 +29,8 @@ export class Dashboard
 		this.lowerFloor = new LowerFloor();
 		this.tempChart = new TempChart();
 		this.logViewer = new LogViewer();
+
+		this.logViewer.Update.on(() => { this.canvas.requestRenderAll(); });
 	}
 	
 	render():void
@@ -45,6 +47,7 @@ export class Dashboard
         let lowerFloor = this.lowerFloor.getLowerFloorGroup();
 		let tempChart = this.tempChart.getTempChart();
         let securityBox = this.alarmPanel.getSecurityBox();
+
 		let logViewer = this.logViewer.getLogViewer();
 		
 		this.canvas.add(title, underline, this.clock, this.date, upperFloor, lowerFloor, securityBox, tempChart, logViewer);
