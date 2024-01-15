@@ -1,5 +1,5 @@
 import { fabric } from 'fabric'
-import { UpperRooms, Sensors, Styles, SensorArea, sensorShadow, noShadow } from './data'
+import * as data from './data'
 import * as helpers from './helpers'
 
 export class UpperFloor
@@ -14,28 +14,13 @@ export class UpperFloor
 
 	getUpperFloorGroup():fabric.Group
 	{
-		let upperFloorOutline = new fabric.Path(helpers.cornerBoxStr(560, 368, 20), Styles.GlowingLine);
-	
-		let elements = [];
-		for (var i = 0; i < UpperRooms.length; i++)
-		{
-			elements.push(helpers.getRoom(UpperRooms[i]));
-		}
+		const xr = (document.getElementById("rot-x") as HTMLInputElement).value;
+		const yr = (document.getElementById("rot-y") as HTMLInputElement).value;
+		const zr = (document.getElementById("rot-z") as HTMLInputElement).value;
 
-		for (var j = 0; j < Sensors.length; j++)
-		{
-			if (Sensors[j].area == SensorArea.UpperFloor)
-			{
-				let sensorPath = helpers.getSensor(Sensors[j]);
+		const dtr = Math.PI / 180;
 
-				elements.push(sensorPath);
-				this.sensors[Sensors[j].id] = sensorPath;
-			}
-		}
-
-		elements.push(upperFloorOutline);
-
-		return new fabric.Group(elements, { left: 640, top: 150, selectable: false });
+		return helpers.renderModel(data.cube, { x: Number(xr) * dtr, y: Number(yr) * dtr, z: Number(zr) * dtr })
 	}
 
 	refreshSensors(data: any): void
@@ -47,11 +32,11 @@ export class UpperFloor
 			{
 				if (data[i].state == "on")
 				{
-					sensor.set({ fill: "yellow", shadow: sensorShadow });
+					sensor.set({ fill: "yellow", shadow: data.sensorShadow });
 				}
 				else
 				{
-					sensor.set({ fill: "white", shadow: noShadow });
+					sensor.set({ fill: "white", shadow: data.noShadow });
 				}
 			}
 		}

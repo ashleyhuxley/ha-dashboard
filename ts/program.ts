@@ -16,9 +16,32 @@ export class Program
         this.dashboard = new Dashboard(this.canvas);
         this.client = new ApiClient();
     }
+
+    increment(id: string) {
+        var current = Number((document.getElementById(id) as HTMLInputElement).value);
+        current += 2;
+        if (current > 360)
+        {
+            current = 0;
+        }
+        (document.getElementById(id) as HTMLInputElement).value = String(current);
+    }
     
     run(): void
     {
+        document.getElementById("rot-x").addEventListener("change", (event) => { this.dashboard.render(); });
+        document.getElementById("rot-y").addEventListener("change", (event) => { this.dashboard.render(); });
+        document.getElementById("rot-z").addEventListener("change", (event) => { this.dashboard.render(); });
+        document.getElementById("vp-x").addEventListener("change", (event) => { this.dashboard.render(); });
+        document.getElementById("vp-y").addEventListener("change", (event) => { this.dashboard.render(); });
+        document.getElementById("vp-z").addEventListener("change", (event) => { this.dashboard.render(); });
+
+        setInterval(() => {
+            this.increment("rot-y");
+
+            this.dashboard.render();
+          }, 50);
+
         this.dashboard.render();
 
         var root = this;
@@ -30,8 +53,8 @@ export class Program
     refreshData(): void
     {
         //this.client.getTempHistory(data.temperatureSensors, this.renderTemperatureChart);
-        this.client.getSensorStates((data) =>  { this.dashboard.refreshSensors(data) } );
-        this.client.getAlarmState((data) => { this.dashboard.alarmPanel.setState(data.state) } );      
+        //this.client.getSensorStates((data) =>  { this.dashboard.refreshSensors(data) } );
+        //this.client.getAlarmState((data) => { this.dashboard.alarmPanel.setState(data.state) } );      
     }
 
     refreshLogs(): void
@@ -39,6 +62,6 @@ export class Program
         let date = new Date();
         date.setHours(date.getHours() - 1);
 
-        this.client.getLogsSince(date, (data) => { this.dashboard.logViewer.updateLogs(data); });
+        //this.client.getLogsSince(date, (data) => { this.dashboard.logViewer.updateLogs(data); });
     }
 }

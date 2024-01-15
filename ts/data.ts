@@ -8,17 +8,25 @@ export enum Palette
 	Turquoise = "#38d4e1",
 	White = "#FFFFFF",
 	Black = "#000000",
-	BgColor = "#192028",
+	BgColor = "#000000",
 	AlarmArmedHome = "#FF3300",
 	AlarmArmedAway = "#FF0000",
 	AlarmDisarmed = "#00FF00",
-	Yellow = "yellow"
+	Yellow = "yellow",
+	LcarsOrange = "rgba(255, 153, 102)",
+	LcarsLilac = "rgba(204, 153, 204)",
+	LcarsBlue = "rgba(153, 153, 204)",
+	LcarsRed = "rgba(204, 102, 102)",
+	LcarsYellow = "rgba(255, 204, 153)",
+	LcarsPurple = "rgba(153, 153, 255)",
+	LcarsPink = "rgba(204, 102, 153)",
 }
 
 export enum Font
 {
 	LibelSuit = "Libel Suit Rg",
-	Pirulen = "Pirulen Rg"
+	Pirulen = "Pirulen Rg",
+	LCARS = "LCARS"
 }
 
 export enum SensorArea
@@ -116,9 +124,9 @@ export const noShadow:fabric.Shadow = new fabric.Shadow({
 export var Styles =
 {
 	RoomTitleStyle: { left: 5, top: 5, fontFamily: "Pirulen Rg", fontSize: 15, fill: "white", charSpacing: 0 },
-	RoomStyle: { stroke: Palette.Blue, strokeWidth: 1, fill: "rgba(100,130,224,0.2)" },
+	RoomStyle: { stroke: Palette.LcarsOrange, strokeWidth: 1 },
 	DoorStyle: { stroke: "rgba(255, 255, 255, 0.6)", fill: "rgba(0,0,0,0)", strokeLineCap: "square", strokeWidth: 1 },
-	GlowingLine: { stroke: "white", shadow: glowingShadow, fill: "rgba(0,0,0,0)", strokeLineCap: "square", strokeWidth: 3 }
+	GlowingLine: { stroke: "white", shadow: glowingShadow, fill: "rgba(0,0,0,0)", strokeLineCap: "square", strokeWidth: 3 },
 }
 
 export var temperatureSensors = [
@@ -128,6 +136,171 @@ export var temperatureSensors = [
 	"sensor.outside_air"
 ];
 
-export const TOKEN = "";
-export const API_BASE = "https://instance/api";
-export const ALARM_ENTITY_ID = "alarm_id";
+export var cube: Model = {
+	vectors: [
+		// Ground level
+		{ x: 350, y: 0, z: 0 },
+		{ x: 200, y: 0, z: 0 },
+
+		{ x: 600, y: 100, z: 0 },
+		{ x: 350, y: 100, z: 0 },
+		{ x: 200, y: 100, z: 0 },
+		{ x: 0, y: 100, z: 0 },
+
+		{ x: 600, y: 480, z: 0 },
+		{ x: 350, y: 480, z: 0 },
+		{ x: 0, y: 480, z: 0 },
+
+		{ x: 600, y: 650, z: 0 },
+		{ x: 350, y: 650, z: 0 },
+
+		{ x: 550, y: 700, z: 0 },
+		{ x: 400, y: 700, z: 0 },
+
+		// Mid level
+		{ x: 350, y: 0, z: 200 },
+		{ x: 200, y: 0, z: 200 },
+
+		{ x: 600, y: 100, z: 200 },
+		{ x: 350, y: 100, z: 200 },
+		{ x: 200, y: 100, z: 200 },
+		{ x: 0, y: 100, z: 200 },
+
+		{ x: 600, y: 480, z: 200 },
+		{ x: 350, y: 480, z: 200 },
+		{ x: 0, y: 480, z: 200 },
+
+		{ x: 600, y: 650, z: 200 },
+		{ x: 350, y: 650, z: 200 },
+
+		{ x: 550, y: 700, z: 200 },
+		{ x: 400, y: 700, z: 200 },
+
+		// Upper level
+		{ x: 600, y: 100, z: 400 },
+		{ x: 350, y: 100, z: 400 },
+		{ x: 200, y: 100, z: 400 },
+		{ x: 0, y: 100, z: 400 },
+
+		{ x: 600, y: 480, z: 400 },
+		{ x: 350, y: 480, z: 400 },
+		{ x: 0, y: 480, z: 400 },
+
+		// Conservatory roof
+		{ x: 475, y: 480, z: 280 },
+		{ x: 475, y: 650, z: 280 },
+
+		// Roof
+		{ x: 0, y: 290, z: 560 },
+		{ x: 600, y: 290, z: 560 },
+
+		// Porch Roof
+		{ x: 350, y: 100, z: 250 },
+		{ x: 200, y: 100, z: 250 },
+
+	],
+	edges: [
+		// Ground level
+		{ startIx: 0, endIx: 1 },
+		{ startIx: 0, endIx: 3 },
+		{ startIx: 1, endIx: 4 },
+		{ startIx: 2, endIx: 3 },
+		{ startIx: 3, endIx: 4 },
+		{ startIx: 4, endIx: 5 },
+		{ startIx: 2, endIx: 6 },
+		{ startIx: 3, endIx: 7 },
+		{ startIx: 5, endIx: 8 },
+		{ startIx: 6, endIx: 7 },
+		{ startIx: 7, endIx: 8 },
+		{ startIx: 6, endIx: 9 },
+		{ startIx: 7, endIx: 10 },
+		{ startIx: 9, endIx: 11 },
+		{ startIx: 11, endIx: 12 },
+		{ startIx: 10, endIx: 12 },
+
+		// Mid level
+		{ startIx: 0, endIx: 13 },
+		{ startIx: 1, endIx: 14 },
+		{ startIx: 2, endIx: 15 },
+		{ startIx: 3, endIx: 16 },
+		{ startIx: 4, endIx: 17 },
+		{ startIx: 5, endIx: 18 },
+		{ startIx: 6, endIx: 19 },
+		{ startIx: 7, endIx: 20 },
+		{ startIx: 8, endIx: 21 },
+		{ startIx: 9, endIx: 22 },
+		{ startIx: 10, endIx: 23 },
+		{ startIx: 11, endIx: 24 },
+		{ startIx: 12, endIx: 25 },
+
+		// Ground to mid connections
+		{ startIx: 13, endIx: 14 },
+		{ startIx: 13, endIx: 16 },
+		{ startIx: 14, endIx: 17 },
+		{ startIx: 15, endIx: 16 },
+		{ startIx: 16, endIx: 17 },
+		{ startIx: 17, endIx: 18 },
+		{ startIx: 15, endIx: 19 },
+		{ startIx: 16, endIx: 20 },
+		{ startIx: 18, endIx: 21 },
+		{ startIx: 19, endIx: 20 },
+		{ startIx: 20, endIx: 21 },
+		{ startIx: 19, endIx: 22 },
+		{ startIx: 20, endIx: 23 },
+		{ startIx: 22, endIx: 24 },
+		{ startIx: 24, endIx: 25 },
+		{ startIx: 23, endIx: 25 },
+
+		// Upper Level
+		{ startIx: 26, endIx: 27 },
+		{ startIx: 27, endIx: 28 },
+		{ startIx: 28, endIx: 29 },
+		{ startIx: 26, endIx: 30 },
+		{ startIx: 29, endIx: 32 },
+		{ startIx: 30, endIx: 31 },
+		{ startIx: 31, endIx: 32 },
+
+		// Mid to Upper
+		{ startIx: 15, endIx: 26 },
+		{ startIx: 18, endIx: 29 },
+		{ startIx: 19, endIx: 30 },
+		{ startIx: 21, endIx: 32 },
+
+		// Conservatory roof
+		{ startIx: 33, endIx: 34 },
+		{ startIx: 19, endIx: 33 },
+		{ startIx: 20, endIx: 33 },
+		{ startIx: 22, endIx: 34 },
+		{ startIx: 23, endIx: 34 },
+		{ startIx: 24, endIx: 34 },
+		{ startIx: 25, endIx: 34 },
+
+		// Roof
+		{ startIx: 35, endIx: 36 },
+		{ startIx: 26, endIx: 36 },
+		{ startIx: 30, endIx: 36 },
+		{ startIx: 29, endIx: 35 },
+		{ startIx: 32, endIx: 35 },
+
+		// Porch roof
+		{ startIx: 13, endIx: 37 },
+		{ startIx: 14, endIx: 38 },
+		{ startIx: 16, endIx: 37 },
+		{ startIx: 17, endIx: 38 },
+		{ startIx: 37, endIx: 38 },
+	],
+	faces: [
+		{ points: [0, 1, 4, 3], fill: Palette.LcarsBlue },
+		{ points: [2, 5, 8, 6], fill: Palette.LcarsOrange },
+		{ points: [6, 7, 10, 12, 11, 9], fill: Palette.LcarsLilac },
+		{ points: [15, 2, 6, 19], fill: Palette.LcarsOrange },
+		{ points: [2, 3, 16, 15], fill: Palette.LcarsOrange },
+		{ points: [5, 4, 17, 18], fill: Palette.LcarsOrange },
+		{ points: [5, 8, 21, 18], fill: Palette.LcarsOrange },
+		{ points: [1, 0, 13, 14], fill: Palette.LcarsBlue },
+	]
+}
+
+export const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI0YTM3MWEzMDJkYjI0YWQ0YWExZWUwMmFiYTkwOWRkZiIsImlhdCI6MTcwMTI1MzUwMCwiZXhwIjoyMDE2NjEzNTAwfQ.rw6fmethqM1fae_9et2JoreXdj6gl8-ib3CtoOa1WOo";
+export const API_BASE = "https://home.electricfox.co.uk/api";
+export const ALARM_ENTITY_ID = "alarm_control_panel.serenity_alarm";

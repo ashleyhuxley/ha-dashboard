@@ -1,0 +1,3 @@
+open sftp://USER:PASS@10.20.10.19/ -hostkey="KEY"
+put D:\Code\ha-dashboard\bundle.js /var/www/html/bundle.js
+exit

@@ -19,8 +19,25 @@
 </head>
 
 <body>
-  <!-- your content here... -->
-  <canvas id="mainCanvas" width="1280" height="1024"></canvas>
+  <table>
+    <tr>
+      <td>
+        <canvas id="mainCanvas" width="1280" height="1024"></canvas>
+      </td>
+      <td style="vertical-align: top;">
+        <div style="margin: 20px;">
+          <input type="range" name="rot-x" id="rot-x" min="0" max="360" value="0" />
+          <input type="range" name="rot-y" id="rot-y" min="0" max="360" value="0" />
+          <input type="range" name="rot-z" id="rot-z" min="0" max="360" value="0" />
+          <hr />
+          <input type="range" name="vp-x" id="vp-x" min="-5000" max="5000" value="300" />
+          <input type="range" name="vp-y" id="vp-y" min="-5000" max="5000" value="300" />
+          <input type="range" name="vp-x" id="vp-z" min="-5000" max="5000" value="0" />
+        </div>
+      </td>
+    </tr>
+  </table>>
+  
 
   <script type="text/javascript"> 
     var cachebuster = Math.round(new Date().getTime() / 1000); 
